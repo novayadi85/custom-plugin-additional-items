@@ -1,0 +1,46 @@
+
+type Additional {
+   variantId: ID 
+   productId: ID
+   variant: CatalogProductVariant
+}
+
+extend type CatalogProduct {
+  Period: String
+  additional:[Additional]
+}
+
+input AdditionalInput {
+  "Variant input"
+  variant: ProductVariantInput
+
+  productId: ID!
+
+  "ID of variant to update"
+  variantId: ID!
+}
+
+extend type Product {
+  Period: String
+  additional:[Additional]
+}
+
+extend type CartItem {
+  Period: String
+}
+
+extend input ProductInput {
+  "Product input"
+  additional: [AdditionalInput]
+
+}
+
+extend type Query {
+
+  additional(
+    productId: ID!
+
+    variantId: ID!
+  ): CatalogProductVariant
+
+}
